@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню — La Seta</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#F9F5EE',
+              olive: '#7E9B5A',
+              terracotta: '#A63F2B',
+            },
+            fontFamily: {
+              serif: ['Playfair Display', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+      [x-cloak] { display: none !important; }
+      .sticky-cart {
+        position: sticky;
+        top: 20px;
+      }
+      .menu-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body class="font-sans text-gray-800 bg-cream" x-data="menuApp">
+  <!-- Header -->
+  <header class="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-serif font-bold text-olive">LA SETA</div>
+      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="text-gray-700 hover:text-olive transition">Головна</a>
+        <a href="menu.html" class="text-gray-700 text-olive font-medium transition">Меню</a>
+        <a href="about.html" class="text-gray-700 hover:text-olive transition">Про нас</a>
+        <a href="gallery.html" class="text-gray-700 hover:text-olive transition">Галерея</a>
+        <a href="contact.html" class="text-gray-700 hover:text-olive transition">Контакти</a>
+      </nav>
+      <div class="hidden md:flex space-x-4">
+        <a href="reservation.html" class="px-4 py-2 bg-terracotta text-white rounded-full hover:bg-terracotta/90 transition">Забронювати</a>
+        <a href="order.html" class="px-4 py-2 border border-olive text-olive rounded-full hover:bg-olive/10 transition">Замовити</a>
+      </div>
+      <button class="md:hidden">
+        <i data-feather="menu"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Menu Section -->
+  <section class="pt-28 pb-12">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-8">
+        <!-- Filters & Search -->
+        <div class="md:w-1/4">
+          <h1 class="text-3xl font-serif font-bold mb-8">Наше меню</h1>
+          
+          <!-- Search -->
+          <div class="mb-6 relative">
+            <input 
+              type="text" 
+              placeholder="Пошук страв..." 
+              class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent"
+              x-model="searchQuery"
+              @input="filterMenu()"
+            >
+            <i data-feather="search" class="absolute right-3 top-2.5 text-gray-400"></i>
+          </div>
+
+          <!-- Filters -->
+          <div class="bg-white p-4 rounded-xl shadow-sm mb-6">
+            <h3 class="font-medium mb-4 flex items-center">
+              <i data-feather="filter" class="mr-2 w-4 h-4"></i>
+              Фільтри
+            </h3>
+            
+            <!-- Categories -->
+            <div class="mb-4">
+              <h4 class="text-sm font-medium text-gray-700 mb-2">Категорії</h4>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    checked 
+                    @change="toggleCategory('all')">
+                  Всі
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleCategory('antipasti')">
+                  Антіпасті
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleCategory('salads')">
+                  Салати
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleCategory('pasta')">
+                  Паста
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleCategory('pizza')">
+                  Піца
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleCategory('desserts')">
+                  Десерти
+                </label>
+              </div>
+            </div>
+
+            <!-- Dietary -->
+            <div class="mb-4">
+              <h4 class="text-sm font-medium text-gray-700 mb-2">Дієтичні обмеження</h4>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleDiet('vegetarian')">
+                  Вегетаріанські
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleDiet('vegan')">
+                  Веганські
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleDiet('glutenFree')">
+                  Без глютену
+                </label>
+              </div>
+            </div>
+
+            <!-- Time -->
+            <div>
+              <h4 class="text-sm font-medium text-gray-700 mb-2">Час приготування</h4>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleTime('fast')">
+                  До 15 хвилин
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleTime('medium')">
+                  15-30 хвилин
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-2 rounded border-gray-300 text-olive focus:ring-olive" 
+                    @change="toggleTime('slow')">
+                  Більше 30 хвилин
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sorting -->
+          <div class="bg-white p-4 rounded-xl shadow-sm">
+            <h3 class="font-medium mb-4 flex items-center">
+              <i data-feather="arrow-up-circle" class="mr-2 w-4 h-4"></i>
+              Сортування
+            </h3>
+            <select 
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent"
+              @change="sortMenu($event.target.value)"
+            >
+              <option value="popular">За популярністю</option>
+              <option value="priceLow">Від дешевих до дорогих</option>
+              <option value="priceHigh">Від дорогих до дешевих</option>
+              <option value="time">За часом приготування</option>
+              <option value="new">Новинки</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="md:w-2/4">
+          <!-- Antipasti -->
+          <div class="mb-12">
+            <h2 class="text-2xl font-serif font-bold mb-6 pb-2 border-b border-gray-200">Антіпасті / Antipasti</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+              <template x-for="item in filteredMenu" :key="item.id">
+                <template x-if="item.category === 'antipasti'">
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 menu-card" x-data="{added: false}">
+                    <img :src="item.image" :alt="item.name" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                      <div class="flex justify-between items-start">
+                        <h3 class="font-serif text-xl font-medium" x-text="item.name"></h3>
+                        <div class="flex space-x-1">
+                          <span x-show="item.isPopular" class="bg-olive/10 text-olive px-2 py-1 rounded-full text-xs">Хіт</span>
+                          <span x-show="item.isVegetarian" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Вег</span>
+                          <span x-show="item.isVegan" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Веган</span>
+                          <span x-show="item.isGlutenFree" class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Без глютену</span>
+                        </div>
+                      </div>
+                      <p class="text-gray-600 mt-2" x-text="item.description"></p>
+                      <div class="flex justify-between items-center mt-4">
+                        <div>
+                          <span class="font-medium text-gray-800" x-text="`${item.price} ₴`"></span>
+                          <span class="text-xs text-gray-500 ml-2" x-text="item.time"></span>
+                        </div>
+                        <button 
+                          class="bg-terracotta text-white p-2 rounded-full hover:bg-terracotta/90 transition"
+                          @click="addToCart(item); added=true; setTimeout(() => added=false, 1000)"
+                        >
+                          <i x-show="!added" data-feather="plus" class="w-4 h-4"></i>
+                          <span x-show="added" class="text-xs">Додано</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+            </div>
+          </div>
+
+          <!-- Salads -->
+          <div class="mb-12">
+            <h2 class="text-2xl font-serif font-bold mb-6 pb-2 border-b border-gray-200">Салати / Insalate</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+              <template x-for="item in filteredMenu" :key="item.id">
+                <template x-if="item.category === 'salads'">
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 menu-card" x-data="{added: false}">
+                    <img :src="item.image" :alt="item.name" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                      <div class="flex justify-between items-start">
+                        <h3 class="font-serif text-xl font-medium" x-text="item.name"></h3>
+                        <div class="flex space-x-1">
+                          <span x-show="item.isPopular" class="bg-olive/10 text-olive px-2 py-1 rounded-full text-xs">Хіт</span>
+                          <span x-show="item.isVegetarian" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Вег</span>
+                          <span x-show="item.isVegan" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Веган</span>
+                          <span x-show="item.isGlutenFree" class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Без глютену</span>
+                        </div>
+                      </div>
+                      <p class="text-gray-600 mt-2" x-text="item.description"></p>
+                      <div class="flex justify-between items-center mt-4">
+                        <div>
+                          <span class="font-medium text-gray-800" x-text="`${item.price} ₴`"></span>
+                          <span class="text-xs text-gray-500 ml-2" x-text="item.time"></span>
+                        </div>
+                        <button 
+                          class="bg-terracotta text-white p-2 rounded-full hover:bg-terracotta/90 transition"
+                          @click="addToCart(item); added=true; setTimeout(() => added=false, 1000)"
+                        >
+                          <i x-show="!added" data-feather="plus" class="w-4 h-4"></i>
+                          <span x-show="added" class="text-xs">Додано</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+            </div>
+          </div>
+
+          <!-- Pasta -->
+          <div class="mb-12">
+            <h2 class="text-2xl font-serif font-bold mb-6 pb-2 border-b border-gray-200">Паста / Pasta</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+              <template x-for="item in filteredMenu" :key="item.id">
+                <template x-if="item.category === 'pasta'">
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 menu-card" x-data="{added: false}">
+                    <img :src="item.image" :alt="item.name" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                      <div class="flex justify-between items-start">
+                        <h3 class="font-serif text-xl font-medium" x-text="item.name"></h3>
+                        <div class="flex space-x-1">
+                          <span x-show="item.isPopular" class="bg-olive/10 text-olive px-2 py-1 rounded-full text-xs">Хіт</span>
+                          <span x-show="item.isVegetarian" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Вег</span>
+                          <span x-show="item.isVegan" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Веган</span>
+                          <span x-show="item.isGlutenFree" class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Без глютену</span>
+                        </div>
+                      </div>
+                      <p class="text-gray-600 mt-2" x-text="item.description"></p>
+                      <div class="flex justify-between items-center mt-4">
+                        <div>
+                          <span class="font-medium text-gray-800" x-text="`${item.price} ₴`"></span>
+                          <span class="text-xs text-gray-500 ml-2" x-text="item.time"></span>
+                        </div>
+                        <button 
+                          class="bg-terracotta text-white p-2 rounded-full hover:bg-terracotta/90 transition"
+                          @click="addToCart(item); added=true; setTimeout(() => added=false, 1000)"
+                        >
+                          <i x-show="!added" data-feather="plus" class="w-4 h-4"></i>
+                          <span x-show="added" class="text-xs">Додано</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+            </div>
+          </div>
+
+          <!-- Pizza -->
+          <div class="mb-12">
+            <h2 class="text-2xl font-serif font-bold mb-6 pb-2 border-b border-gray-200">Піца / Pizza</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+              <template x-for="item in filteredMenu" :key="item.id">
+                <template x-if="item.category === 'pizza'">
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 menu-card" x-data="{added: false}">
+                    <img :src="item.image" :alt="item.name" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                      <div class="flex justify-between items-start">
+                        <h3 class="font-serif text-xl font-medium" x-text="item.name"></h3>
+                        <div class="flex space-x-1">
+                          <span x-show="item.isPopular" class="bg-olive/10 text-olive px-2 py-1 rounded-full text-xs">Хіт</span>
+                          <span x-show="item.isVegetarian" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Вег</span>
+                          <span x-show="item.isVegan" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Веган</span>
+                          <span x-show="item.isGlutenFree" class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Без глютену</span>
+                        </div>
+                      </div>
+                      <p class="text-gray-600 mt-2" x-text="item.description"></p>
+                      <div class="flex justify-between items-center mt-4">
+                        <div>
+                          <span class="font-medium text-gray-800" x-text="`${item.price} ₴`"></span>
+                          <span class="text-xs text-gray-500 ml-2" x-text="item.time"></span>
+                        </div>
+                        <button 
+                          class="bg-terracotta text-white p-2 rounded-full hover:bg-terracotta/90 transition"
+                          @click="addToCart(item); added=true; setTimeout(() => added=false, 1000)"
+                        >
+                          <i x-show="!added" data-feather="plus" class="w-4 h-4"></i>
+                          <span x-show="added" class="text-xs">Додано</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+            </div>
+          </div>
+
+          <!-- Desserts -->
+          <div class="mb-12">
+            <h2 class="text-2xl font-serif font-bold mb-6 pb-2 border-b border-gray-200">Десерти / Dolci</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+              <template x-for="item in filteredMenu" :key="item.id">
+                <template x-if="item.category === 'desserts'">
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 menu-card" x-data="{added: false}">
+                    <img :src="item.image" :alt="item.name" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                      <div class="flex justify-between items-start">
+                        <h3 class="font-serif text-xl font-medium" x-text="item.name"></h3>
+                        <div class="flex space-x-1">
+                          <span x-show="item.isPopular" class="bg-olive/10 text-olive px-2 py-1 rounded-full text-xs">Хіт</span>
+                          <span x-show="item.isVegetarian" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Вег</span>
+                          <span x-show="item.isVegan" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Веган</span>
+                          <span x-show="item.isGlutenFree" class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Без глютену</span>
+                        </div>
+                      </div>
+                      <p class="text-gray-600 mt-2" x-text="item.description"></p>
+                      <div class="flex justify-between items-center mt-4">
+                        <div>
+                          <span class="font-medium text-gray-800" x-text="`${item.price} ₴`"></span>
+                          <span class="text-xs text-gray-500 ml-2" x-text="item.time"></span>
+                        </div>
+                        <button 
+                          class="bg-terracotta text-white p-2 rounded-full hover:bg-terracotta/90 transition"
+                          @click="addToCart(item); added=true; setTimeout(() => added=false, 1000)"
+                        >
+                          <i x-show="!added" data-feather="plus" class="w-4 h-4"></i>
+                          <span x-show="added" class="text-xs">Додано</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shopping Cart -->
+        <div class="md:w-1/4">
+          <div class="sticky-cart bg-white rounded-xl shadow-lg p-6">
+            <h2 class="font-serif text-xl font-bold mb-4 flex items-center">
+              <i data-feather="shopping-cart" class="mr-2 w-5 h-5"></i>
+              Ваше замовлення
+            </h2>
+            
+            <div x-show="cart.length === 0" class="text-center py-8">
+              <i data-feather="shopping-bag" class="w-12 h-12 mx-auto text-gray-300"></i>
+              <p class="text-gray-500 mt-4">Ваша корзина порожня</p>
+            </div>
+
+            <div x-show="cart.length > 0">
+              <div class="max-h-64 overflow-y-auto">
+                <template x-for="(item, index) in cart" :key="index">
+                  <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                    <div class="flex-1">
+                      <h4 x-text="item.name" class="font-medium"></h4>
+                      <div class="flex justify-between items-center">
+                        <span x-text="`${item.price} ₴`" class="text-sm text-gray-600"></span>
+                        <div class="flex items-center">
+                          <button @click="decreaseQuantity(index)" class="text-gray-500 hover:text-terracotta">
+                            <i data-feather="minus" class="w-3 h-3"></i>
+                          </button>
+                          <span x-text="item.quantity" class="mx-2 w-4 text-center"></span>
+                          <button @click="increaseQuantity(index)" class="text-gray-500 hover:text-terracotta">
+                            <i data-feather="plus" class="w-3 h-3"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <button @click="removeFromCart(index)" class="ml-4 text-gray-400 hover:text-red-500">
+                      <i data-feather="trash-2" class="w-4 h-4"></i>
+                    </button>
+                  </div>
+                </template>
+              </div>
+              
+              <div class="pt-4 border-t border-gray-200 mt-4">
+                <div class="flex justify-between font-medium mb-2">
+                  <span>Всього:</span>
+                  <span x-text="`${total} ₴`"></span>
+                </div>
+                
+                <div class="mt-6 space-y-3">
+                  <button 
+                    class="block w-full text-center px-4 py-2 bg-terracotta text-white rounded-full hover:bg-terracotta/90 transition"
+                    @click="proceedToOrder"
+                    :disabled="cart.length === 0"
+                  >
+                    Продовжити замовлення
+                  </button>
+                  <a href="reservation.html" class="block w-full text-center px-4 py-2 border border-gray-300 text-gray-700 rounded-full hover:bg-gray-50 transition">
+                    Забронювати столик
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="font-serif text-xl font-medium mb-4">La Seta</h3>
+          <p class="text-gray-400">Справжня італійська кухня в мінімалістичному стилі.</p>
+          <div class="mt-4 flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i data-feather="facebook" class="w-5 h-5"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i data-feather="instagram" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Меню</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition">Головна</a></li>
+            <li><a href="menu.html" class="text-gray-400 hover:text-white transition">Меню</a></li>
+            <li><a href="about.html" class="text-gray-400 hover:text-white transition">Про нас</a></li>
+            <li><a href="gallery.html" class="text-gray-400 hover:text-white transition">Галерея</a></li>
+            <li><a href="contact.html" class="text-gray-400 hover:text-white transition">Контакти</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Контакти</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-start">
+              <i data-feather="map-pin" class="mr-2 w-4 h-4 mt-0.5"></i>
+              <span>Київ, вул. Італійська, 7</span>
+            </li>
+            <li class="flex items-start">
+              <i data-feather="phone" class="mr-2 w-4 h-4 mt-0.5"></i>
+              <span>+380 44 123 4567</span>
+            </li>
+            <li class="flex items-start">
+              <i data-feather="mail" class="mr-2 w-4 h-4 mt-0.5"></i>
+              <span>info@laseta.ua</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Години роботи</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex justify-between">
+              <span>Пн-Чт</span>
+              <span>11:00 - 23:00</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Пт-Сб</span>
+              <span>11:00 - 00:00</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Нд</span>
+              <span>11:00 - 22:00</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>© 2023 Ristorante La Seta. Всі права захищено.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('menuApp', () => ({
+        searchQuery: '',
+        selectedCategories: ['all'],
+        selectedDiets: [],
+        selectedTimes: [],
+        cart: [],
+        
+        // Sample menu data - in real app this would come from an API
+        menuItems: [
+          // Antipasti
+          { 
+            id: 1, 
+            name: 'Брускетта з томатами', 
+            description: 'Томати, базилік, оливкова олія, часникова грінка', 
+            price: 129, 
+            time: '10 хв', 
+            image: 'http://static.photos/food/640x360/10', 
+            category: 'antipasti', 
+            isVegetarian: true,
+            isPopular: true 
+          },
+          { 
+            id: 2, 
+            name: 'Брускетта з печеним перцем і рікотою', 
+            description: 'Печений перець, домашня рікота, трюфельна олія', 
+            price: 149, 
+            time: '12 хв', 
+            image: 'http://static.photos/food/640x360/11', 
+            category: 'antipasti', 
+            isVegetarian: true 
+          },
+          { 
+            id: 3, 
+            name: 'Карпаччо з яловичини', 
+            description: 'Тонкі слайси яловичини з пармезаном та руколою', 
+            price: 289, 
+            time: '15 хв', 
+            image: 'http://static.photos/food/640x360/12', 
+            category: 'antipasti', 
+            isPopular: true 
+          },
+          { 
+            id: 4, 
+            name: 'Антипасто делла Каза', 
+            description: 'Асорті з сирів, копченостей та маринованих овочів', 
+            price: 349, 
+            time: '8 хв', 
+            image: 'http://static.photos/food/640x360/13', 
+            category: 'antipasti'
+          },
+          { 
+            id: 5, 
+            name: 'Мідії в соусі мараєра', 
+            description: 'Свіжі мідії з часником, білим вином та томатами', 
+            price: 289, 
+            time: '15 хв', 
+            image: 'http://static.photos/food/640x360/14', 
+            category: 'antipasti'
+          },
+          { 
+            id: 6, 
+            name: 'Прошутто з динєю', 
+            description: 'Італійський прошутто зі свіжою динєю та руколою', 
+            price: 229, 
+            time: '5 хв', 
+            image: 'http://static.photos/food/640x360/15', 
+            category: 'antipasti',
+            isPopular: true
+          },
+          { 
+            id: 7, 
+            name: 'Фокача з оливками', 
+            description: 'Домашня фокача з оливковою олією та оливками', 
+            price: 119, 
+            time: '12 хв', 
+            image: 'http://static.photos/food/640x360/16', 
+            category: 'antipasti',
+            isVegetarian: true
+          },
+          
+          // Salads
+          { 
+            id: 8, 
+            name: 'Салат "Капрезе"', 
+            description: 'Моцарела, томати, базилік, бальзамічний крем', 
+            price: 189, 
+            time: '8 хв', 
+            image: 'http://static.photos/food/640x360/20', 
+            category: 'salads', 
+            isVegetarian: true 
+          },
+          { 
+            id: 9, 
+            name: 'Рукола з пармезаном і грушею', 
+            description: 'Свіжа рукола, груша, пармезан, грісіні', 
+            price: 209, 
+            time: '10 хв', 
+            image: 'http://static.photos/food/640x360/21', 
+            category: 'salads', 
+            isVegetarian: true,
+            isPopular: true 
+          },
+          { 
+            id: 10, 
+            name: 'Цезар з креветками', 
+            description: 'Салат Цезар з тигровими креветками та пармезаном', 
+            price: 279, 
+            time: '12 хв', 
+            image: 'http://static.photos/food/640x360/22', 
+            category: 'salads'
+          },
+          { 
+            id: 11, 
+            name: 'Грецький салат', 
+            description: 'Томати, огірки, оливки, фета, оливкова олія', 
+            price: 189, 
+            time: '8 хв', 
+            image: 'http://static.photos/food/640x360/23', 
+            category: 'salads',
+            isVegetarian: true
+          },
+          { 
+            id: 12, 
+            name: 'Салат з авокадо та креветками', 
+            description: 'Авокадо, тигрові креветки, мікс салату, цитрусовий соус', 
+            price: 299, 
+            time: '10 хв', 
+            image: 'http://static.photos/food/640x360/24', 
+            category: 'salads'
+          },
+          { 
+            id: 13, 
+            name: 'Салат з грушею та горіхами', 
+            description: 'Груша, горіхи, сир з блакитною пліснявою, мікс салату', 
+            price: 219, 
+            time: '8 хв', 
+            image: 'http://static.photos/food/640x360/25', 
+            category: 'salads',
+            isVegetarian: true
+          },
+          { 
+            id: 14, 
+            name: 'Салат Нісуаз', 
+            description: 'Тунець, яйце, стручкова квасоля, томати, оливки', 
+            price: 249, 
+            time: '12 хв', 
+            image: 'http://static.photos/food/640x360/26', 
+            category: 'salads'
+          },
+          
+          // Pasta
+          { 
+            id: 15, 
+            name: 'Спагеті Карбонара', 
+            description: 'Яйце, гуанчале, пармезан, чорний перець', 
+            price: 239, 
+            time: '15 хв', 
+            image: 'http://static.photos/food/640x360/30', 
+            category: 'pasta', 
+            isPopular: true 
+          },
+          { 
+            id: 16, 
+            name: 'Тальятеле Болоньєзе', 
+            description: 'Домашні тальятеле з традиційним м\'ясним соусом', 
+            price: 249, 
+            time: '25 хв', 
+            image: 'http://static.photos/food/640x360/31', 
+            category: 'pasta', 
+            isPopular: true 
+          },
+          { 
+            id: 17, 
+            name: 'Фетуччіні Альфредо', 
+            description: 'Фетуччіні з вершковим соусом та пармезаном', 
+            price: 229, 
+            time: '12 хв', 
+            image: 'http://static.photos/food/640x360/32', 
+            category: 'pasta',
+            isVegetarian: true
+          },
+          { 
+            id: 18, 
+            name: 'Лазанья Болоньєзе', 
+            description: 'Шари пасти, м\'ясний соус, бешамель, пармезан', 
+            price: 289, 
+            time: '25 хв', 
+            image: 'http://static.photos/food/640x360/33', 
+            category: 'pasta',
+            isPopular: true
+          },
+          { 
+            id: 19, 
+            name: 'Равіолі з рикотою та шпинатом', 
+            description: 'Домашні равіолі з начинкою з рикоти та шпинату', 
+            price: 259, 
+            time: '15 хв', 
+            image: 'http://static.photos/food/640x360/34', 
+            category: 'pasta',
+            isVegetarian: true
+          },
+          { 
+            id: 20, 
+            name: 'Лінгвіні з морепродуктами', 
+            description: 'Лінгвіні з мідіями, креветками та кальмарами в томатному соусі', 
+            price: 329, 
+            time: '20 хв', 
+            image: 'http://static.photos/food/640x360/35', 
+            category: 'pasta'
+          },
+          
+          // Pizza
+          { 
+            id: 25, 
+            name: 'Маргарита', 
+            description: 'Томати, моцарела, базилік, оливкова олія', 
+            price: 289, 
+            time: '12 хв', 
+            image: 'http://static.photos/food/640x360/40', 
+            category: 'pizza', 
+            isVegetarian: true,
+            isPopular: true 
+          },
+          { 
+            id: 26, 
+            name: 'Пепероні', 
+            description: 'Томатний соус, моцарела, пепероні, орегано', 
+            price: 329, 
+            time: '12 хв', 
+            image: 'http://static.photos/food/640x360/41', 
+            category: 'pizza', 
+            isPopular: true 
+          },
+          { 
+            id: 27, 
+            name: 'Кватро Стаджоні', 
+            description: 'Моцарела, гриби, шинка, артишоки, оливки', 
+            price: 359, 
+            time: '15 хв', 
+            image: 'http://static.photos/food/640x360/42', 
+            category: 'pizza'
+          },
+          { 
+            id: 28, 
+            name: 'Маринара', 
+            description: 'Томатний соус, часник, орегано, оливкова олія', 
+            price: 199, 
+            time: '10 хв', 
+            image: 'http://static.photos/food/640x360/43', 
+            category: 'pizza',
+            isVegetarian: true,
+            isVegan: true
+          },
+          { 
+            id: 29, 
+            name: 'Капрічоза', 
+            description: 'Томатний соус, моцарела, шинка, гриби, артишоки', 
+            price: 339, 
+            time: '15 хв', 
+            image: 'http://static.photos/food/640x360/44', 
+            category: 'pizza'
+          },
+          { 
+            id: 30, 
+            name: 'Дьябола', 
+            description: 'Томатний соус, моцарела, салямі, перець чилі', 
+            price: 319, 
+            time: '12 хв', 
+            image: 'http://static.photos/food/640x360/45', 
+            category: 'pizza'
+          },
+          
+          // Desserts
+          { 
+            id: 40, 
+            name: 'Тірамісу', 
+            description: 'Класичний італійський десерт з маскарпоне', 
+            price: 149, 
+            time: '5 хв', 
+            image: 'http://static.photos/food/640x360/50', 
+            category: 'desserts', 
+            isVegetarian: true,
+            isPopular: true 
+          },
+          { 
+            id: 41, 
+            name: 'Панна котта з ягодами', 
+            description: 'Ніжний вершковий десерт з ягідним соусом', 
+            price: 139, 
+            time: '5 хв', 
+            image: 'http://static.photos/food/640x360/51', 
+            category: 'desserts', 
+            isVegetarian: true 
+          },
+          { 
+            id: 42, 
+            name: 'Чізкейк Нью-Йорк', 
+            description: 'Класичний чізкейк з ягідним соусом', 
+            price: 159, 
+            time: '5 хв', 
+            image: 'http://static.photos/food/640x360/52', 
+            category: 'desserts',
+            isVegetarian: true
+          },
+          { 
+            id: 43, 
+            name: 'Шоколадний фондан', 
+            description: 'Теплий шоколадний кекс з рідкою начинкою та ванільним морозивом', 
+            price: 169, 
+            time: '12 хв', 
+            image: 'http://static.photos/food/640x360/53', 
+            category: 'desserts',
+            isVegetarian: true
+          },
+          { 
+            id: 44, 
+            name: 'Канолі з рикотою', 
+            description: 'Хрусткі трубочки з начинкою з солодкої рикоти', 
+            price: 139, 
+            time: '5 хв', 
+            image: 'http://static.photos/food/640x360/54', 
+            category: 'desserts',
+            isVegetarian: true
+          },
+          { 
+            id: 45, 
+            name: 'Лимонний тарт', 
+            description: 'Ніжний лимонний крем на пісочній основі', 
+            price: 149, 
+            time: '5 хв', 
+            image: 'http://static.photos/food/640x360/55', 
+            category: 'desserts',
+            isVegetarian: true
+          }
+        ],
+        
+        get filteredMenu() {
+          let filtered = this.menuItems;
+          
+          // Search filter
+          if (this.searchQuery) {
+            filtered = filtered.filter(item => 
+              item.name.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+              item.description.toLowerCase().includes(this.searchQuery.toLowerCase())
+            );
+          }
+          
+          // Category filter
+          if (!this.selectedCategories.includes('all')) {
+            filtered = filtered.filter(item => this.selectedCategories.includes(item.category));
+          }
+          
+          // Diet filters
+          if (this.selectedDiets.includes('vegetarian')) {
+            filtered = filtered.filter(item => item.isVegetarian);
+          }
+          if (this.selectedDiets.includes('vegan')) {
+            filtered = filtered.filter(item => item.isVegan);
+          }
+          if (this.selectedDiets.includes('glutenFree')) {
+            filtered = filtered.filter(item => item.isGlutenFree);
+          }
+          
+          // Time filters
+          if (this.selectedTimes.includes('fast')) {
+            filtered = filtered.filter(item => parseInt(item.time) <= 15);
+          }
+          if (this.selectedTimes.includes('medium')) {
+            filtered = filtered.filter(item => parseInt(item.time) > 15 && parseInt(item.time) <= 30);
+          }
+          if (this.selectedTimes.includes('slow')) {
+            filtered = filtered.filter(item => parseInt(item.time) > 30);
+          }
+          
+          return filtered;
+        },
+        
+        get total() {
+          return this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        },
+        
+        toggleCategory(category) {
+          if (category === 'all') {
+            this.selectedCategories = ['all'];
+          } else {
+            if (this.selectedCategories.includes(category)) {
+              this.selectedCategories = this.selectedCategories.filter(c => c !== category);
+            } else {
+              this.selectedCategories = this.selectedCategories.filter(c => c !== 'all');
+              this.selectedCategories.push(category);
+            }
+            
+            if (this.selectedCategories.length === 0) {
+              this.selectedCategories = ['all'];
+            }
+          }
+        },
+        
+        toggleDiet(diet) {
+          if (this.selectedDiets.includes(diet)) {
+            this.selectedDiets = this.selectedDiets.filter(d => d !== diet);
+          } else {
+            this.selectedDiets.push(diet);
+          }
+        },
+        
+        toggleTime(time) {
+          if (this.selectedTimes.includes(time)) {
+            this.selectedTimes = this.selectedTimes.filter(t => t !== time);
+          } else {
+            this.selectedTimes.push(time);
+          }
+        },
+        
+        sortMenu(type) {
+          switch(type) {
+            case 'priceLow':
+              this.menuItems.sort((a, b) => a.price - b.price);
+              break;
+            case 'priceHigh':
+              this.menuItems.sort((a, b) => b.price - a.price);
+              break;
+            case 'time':
+              this.menuItems.sort((a, b) => parseInt(a.time) - parseInt(b.time));
+              break;
+            case 'new':
+              this.menuItems.sort(() => Math.random() - 0.5);
+              break;
+            default:
+              this.menuItems.sort((a, b) => (b.isPopular || 0) - (a.isPopular || 0));
+          }
+        },
+        
+        addToCart(item) {
+          const existingItem = this.cart.find(i => i.id === item.id);
+          
+          if (existingItem) {
+            existingItem.quantity += 1;
+          } else {
+            this.cart.push({
+              ...item,
+              quantity: 1
+            });
+          }
+        },
+        
+        removeFromCart(index) {
+          this.cart.splice(index, 1);
+        },
+        
+        increaseQuantity(index) {
+          this.cart[index].quantity += 1;
+        },
+        
+        decreaseQuantity(index) {
+          if (this.cart[index].quantity > 1) {
+            this.cart[index].quantity -= 1;
+          } else {
+            this.removeFromCart(index);
+          }
+        },
+        
+        filterMenu() {
+          // The filteredMenu getter will automatically update
+        },
+        
+        proceedToOrder() {
+          if (this.cart.length === 0) return;
+          
+          // Save cart to localStorage
+          localStorage.setItem('lasetaCart', JSON.stringify(this.cart));
+          
+          // Redirect to order processing page
+          window.location.href = 'order-processing.html';
+        }
+      }));
+    });
+  </script>
+  
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+    });
+    feather.replace();
+  </script>
+</body>
+</html>

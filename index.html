@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Seta — Італійський ресторан у Києві | Домашня паста та дров'яна піч</title>
+    <meta name="description" content="La Seta — автентична італійська кухня в центрі Києва. Домашня паста, піца з дров'яної печі, відбірні вина та майстер-класи. Забронюйте столик або замовте онлайн.">
+    <meta property="og:title" content="La Seta — Італійський ресторан у Києві">
+    <meta property="og:description" content="Справжня італійська кухня в мінімалістичному стилі — натуральні інгредієнти, дерево-камінна піч, домашня паста.">
+    <meta property="og:image" content="http://static.photos/food/1200x630/42">
+    <meta property="og:url" content="https://laseta.ua">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#F9F5EE',
+              olive: '#7E9B5A',
+              terracotta: '#A63F2B',
+            },
+            fontFamily: {
+              serif: ['Playfair Display', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+      .parallax-hero {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .menu-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      }
+      .svg-wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        fill: #F9F5EE;
+      }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-cream">
+  <!-- Header -->
+  <header class="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-serif font-bold text-olive">LA SETA</div>
+      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="text-gray-700 hover:text-olive transition">Головна</a>
+        <a href="menu.html" class="text-gray-700 hover:text-olive transition">Меню</a>
+        <a href="about.html" class="text-gray-700 hover:text-olive transition">Про нас</a>
+        <a href="gallery.html" class="text-gray-700 hover:text-olive transition">Галерея</a>
+        <a href="contact.html" class="text-gray-700 hover:text-olive transition">Контакти</a>
+      </nav>
+      <div class="hidden md:flex space-x-4">
+        <a href="reservation.html" class="px-4 py-2 bg-terracotta text-white rounded-full hover:bg-terracotta/90 transition">Забронювати</a>
+        <a href="order.html" class="px-4 py-2 border border-olive text-olive rounded-full hover:bg-olive/10 transition">Замовити</a>
+      </div>
+      <button class="md:hidden">
+        <i data-feather="menu"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="parallax-hero h-screen flex items-center justify-center pt-20" style="background-image: url('http://static.photos/food/1920x1080/1')">
+    <div class="absolute inset-0 bg-black/30"></div>
+    <div class="relative z-10 text-center px-4" data-aos="fade-up" data-aos-duration="800">
+      <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-4">La Seta — справжня італійська кухня</h1>
+      <p class="text-xl text-white mb-8 max-w-2xl mx-auto">Домашня паста, дров'яна піч та атмосферні вечори у серці Києва</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="reservation.html" class="px-6 py-3 bg-terracotta text-white rounded-full hover:bg-terracotta/90 transition text-lg">Забронювати столик</a>
+        <a href="menu.html" class="px-6 py-3 bg-white text-gray-800 rounded-full hover:bg-gray-100 transition text-lg">Замовити зараз</a>
+      </div>
+    </div>
+    <svg class="svg-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
+      <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
+      <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
+    </svg>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-16 bg-cream">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12 text-gray-800" data-aos="fade-up">Наші особливості</h2>
+      <div class="grid md:grid-cols-5 gap-8">
+        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="bg-olive/10 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <i data-feather="home" class="text-terracotta w-8 h-8"></i>
+          </div>
+          <h3 class="font-serif font-medium mb-2">Дров'яна піч</h3>
+          <p class="text-gray-600">Автентичний спосіб приготування піци</p>
+        </div>
+        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="bg-olive/10 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <i data-feather="box" class="text-terracotta w-8 h-8"></i>
+          </div>
+          <h3 class="font-serif font-medium mb-2">Домашня паста</h3>
+          <p class="text-gray-600">Готується щодня за традиційними рецептами</p>
+        </div>
+        <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="bg-olive/10 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <i data-feather="calendar" class="text-terracotta w-8 h-8"></i>
+          </div>
+          <h3 class="font-serif font-medium mb-2">Сезонні продукти</h3>
+          <p class="text-gray-600">Тільки свіжі та якісні інгредієнти</p>
+        </div>
+        <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+          <div class="bg-olive/10 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <i data-feather="award" class="text-terracotta w-8 h-8"></i>
+          </div>
+          <h3 class="font-serif font-medium mb-2">Винний вибір</h3>
+          <p class="text-gray-600">Найкращі італійські вина</p>
+        </div>
+        <div class="text-center" data-aos="fade-up" data-aos-delay="500">
+          <div class="bg-olive/10 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <i data-feather="users" class="text-terracotta w-8 h-8"></i>
+          </div>
+          <h3 class="font-serif font-medium mb-2">Майстер-класи</h3>
+          <p class="text-gray-600">З приготування пасти від шефа</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Dishes -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12 text-gray-800" data-aos="fade-up">Популярні страви</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 menu-card" data-aos="fade-up">
+          <img src="http://static.photos/food/640x360/10" alt="Спагеті Карбонара" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start">
+              <h3 class="font-serif text-xl font-medium">Спагеті Карбонара</h3>
+              <span class="bg-olive/10 text-olive px-2 py-1 rounded-full text-sm">Хіт</span>
+            </div>
+            <p class="text-gray-600 mt-2">Яйце, гуанчале, пармезан</p>
+            <div class="mt-4 flex justify-between items-center">
+              <span class="font-medium text-gray-800">239 ₴</span>
+              <button class="bg-terracotta text-white p-2 rounded-full hover:bg-terracotta/90 transition">
+                <i data-feather="plus" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 menu-card" data-aos="fade-up" data-aos-delay="100">
+          <img src="http://static.photos/food/640x360/11" alt="Піца Маргарита" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start">
+              <h3 class="font-serif text-xl font-medium">Піца Маргарита</h3>
+              <span class="bg-olive/10 text-olive px-2 py-1 rounded-full text-sm">Хіт</span>
+            </div>
+            <p class="text-gray-600 mt-2">Томати, моцарела, базилік</p>
+            <div class="mt-4 flex justify-between items-center">
+              <span class="font-medium text-gray-800">289 ₴</span>
+              <button class="bg-terracotta text-white p-2 rounded-full hover:bg-terracotta/90 transition">
+                <i data-feather="plus" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 menu-card" data-aos="fade-up" data-aos-delay="200">
+          <img src="http://static.photos/food/640x360/12" alt="Тірамісу" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start">
+              <h3 class="font-serif text-xl font-medium">Тірамісу</h3>
+              <span class="bg-olive/10 text-olive px-2 py-1 rounded-full text-sm">Рекомендовано</span>
+            </div>
+            <p class="text-gray-600 mt-2">Класичний італійський десерт</p>
+            <div class="mt-4 flex justify-between items-center">
+              <span class="font-medium text-gray-800">149 ₴</span>
+              <button class="bg-terracotta text-white p-2 rounded-full hover:bg-terracotta/90 transition">
+                <i data-feather="plus" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-12" data-aos="fade-up">
+        <a href="menu.html" class="inline-block px-6 py-3 border border-olive text-olive rounded-full hover:bg-olive/10 transition">Переглянути все меню</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-16 bg-slate-50 relative">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8" data-aos="fade-right">
+          <img src="http://static.photos/people/640x360/13" alt="Шеф-кухар" class="rounded-xl shadow-lg w-full">
+        </div>
+        <div class="md:w-1/2" data-aos="fade-left">
+          <h2 class="text-3xl font-serif font-bold mb-6">Про ресторан</h2>
+          <p class="text-gray-600 mb-6">La Seta — це поєднання традиційної італійської кухні та сучасного мінімалізму. Наш шеф — родом з Неаполя, а рецепти передаються поколіннями.</p>
+          <p class="text-gray-600 mb-6">Ми використовуємо тільки натуральні інгредієнти, багато з яких імпортуємо безпосередньо з Італії.</p>
+          <a href="about.html" class="inline-flex items-center text-terracotta font-medium hover:text-terracotta/80 transition">
+            Дізнатися більше
+            <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12" data-aos="fade-up">Події та майстер-класи</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+          <img src="http://static.photos/food/640x360/14" alt="Майстер-клас з пасти" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <span class="text-sm text-terracotta">Щонеділі</span>
+            <h3 class="font-serif text-xl font-medium mt-2">Майстер-клас з пасти</h3>
+            <p class="text-gray-600 mt-2">Навчимо готувати італійську пасту з нуля</p>
+            <button class="mt-4 w-full py-2 bg-terracotta text-white rounded-full hover:bg-terracotta/90 transition">Записатися</button>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+          <img src="http://static.photos/food/640x360/15" alt="Дегустація вин" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <span class="text-sm text-terracotta">1 раз на місяць</span>
+            <h3 class="font-serif text-xl font-medium mt-2">Дегустація вин</h3>
+            <p class="text-gray-600 mt-2">Знайомство з найкращими італійськими винами</p>
+            <button class="mt-4 w-full py-2 bg-terracotta text-white rounded-full hover:bg-terracotta/90 transition">Записатися</button>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+          <img src="http://static.photos/food/640x360/16" alt="Сезонні спеціалітети" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <span class="text-sm text-terracotta">Щомісячно</span>
+            <h3 class="font-serif text-xl font-medium mt-2">Сезонні спеціалітети</h3>
+            <p class="text-gray-600 mt-2">Унікальні страви, доступні обмежений час</p>
+            <button class="mt-4 w-full py-2 bg-terracotta text-white rounded-full hover:bg-terracotta/90 transition">Дізнатися більше</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 bg-slate-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12" data-aos="fade-up">Відгуки наших гостей</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-sm" data-aos="fade-up">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+              <img src="http://static.photos/people/200x200/1" alt="Андрій" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h4 class="font-medium">Андрій</h4>
+              <div class="flex text-yellow-400">
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-600">"Найкраща паста в місті! Відчуваєш себе як в Італії. Обов'язково спробуйте Карбонару."</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+              <img src="http://static.photos/people/200x200/2" alt="Олена" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h4 class="font-medium">Олена</h4>
+              <div class="flex text-yellow-400">
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-600">"Чудова атмосфера і справжня італійська кухня. Особливо сподобався вибір вин."</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+              <img src="http://static.photos/people/200x200/3" alt="Максим" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h4 class="font-medium">Максим</h4>
+              <div class="flex text-yellow-400">
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                <i data-feather="star" class="w-4 h-4"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-600">"Завжди приємно провести вечір в La Seta. Особлива подяка за майстер-клас з пасти!"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="font-serif text-xl font-medium mb-4">La Seta</h3>
+          <p class="text-gray-400">Справжня італійська кухня в мінімалістичному стилі.</p>
+          <div class="mt-4 flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i data-feather="facebook" class="w-5 h-5"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i data-feather="instagram" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Меню</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Головна</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Меню</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Про нас</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Галерея</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">Контакти</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Контакти</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-start">
+              <i data-feather="map-pin" class="mr-2 w-4 h-4 mt-0.5"></i>
+              <span>Київ, вул. Італійська, 7</span>
+            </li>
+            <li class="flex items-start">
+              <i data-feather="phone" class="mr-2 w-4 h-4 mt-0.5"></i>
+              <span>+380 44 123 4567</span>
+            </li>
+            <li class="flex items-start">
+              <i data-feather="mail" class="mr-2 w-4 h-4 mt-0.5"></i>
+              <span>info@laseta.ua</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Години роботи</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex justify-between">
+              <span>Пн-Чт</span>
+              <span>11:00 - 23:00</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Пт-Сб</span>
+              <span>11:00 - 00:00</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Нд</span>
+              <span>11:00 - 22:00</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>© 2023 Ristorante La Seta. Всі права захищено.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+    });
+    feather.replace();
+  </script>
+</body>
+</html>
